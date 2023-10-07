@@ -1,5 +1,5 @@
 import {Schema, model} from "mongoose";
-import { addLibroToAutor } from "./Autor.js";
+import { addLibroToAutor, deleteLibroToAutor } from "./Autor.js";
 import { uploadImageToCloudinary } from "../helpers/uploadImage.js";
 
 const libroSchema = new Schema({
@@ -86,6 +86,8 @@ export const updateLibro = async (id, libro) => {
 
 export const deleteLibro = async (id) => {
     try {
+        const libro = await Libro.findById(id);
+        await deleteLibroToAutor(id, libro);
         const deletedLibro = await Libro.findByIdAndDelete(id);
         return deletedLibro;
     } catch (error) {

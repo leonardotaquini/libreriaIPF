@@ -45,7 +45,7 @@ export const updateLibroCtrl = async (req, res) => {
 export const deleteLibroCtrl = async (req, res) => {
     try {
         const libro = await deleteLibro(req.params.id);
-        res.status(200).json({msg: 'Libro eliminado'});
+        res.status(200).json(libro);
     } catch (error) {
         console.log(error);
         res.status(500).json(error.message);

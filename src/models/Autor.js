@@ -93,3 +93,20 @@ export const addLibroToAutor = async (id, libro) => {
     }
 }
 
+export const deleteLibroToAutor = async (id, libro) => {
+    try {
+        const autor = await Autor.findById(libro.autor).populate({
+            path: "libros",
+            select: "titulo",
+        });
+
+        autor.libros = autor.libros.filter( item => item._id.toHexString() !== id);
+        return autor;
+        // const updatedAutor = await autor.save();
+        // return updatedAutor;
+        
+    } catch (error) {
+        
+    }
+}
+
