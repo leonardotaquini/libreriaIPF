@@ -1,3 +1,4 @@
+
 import { getLibros, getLibroById, createLibro, updateLibro, deleteLibro, getLibroByISBN, getLibroByAnyWord, getLibroByTitulo, getLibroByGenero } from '../models/Libro.js';
 
 
@@ -23,9 +24,15 @@ export const getLibroByIdCtrl = async (req, res) => {
 
 export const createLibroCtrl = async (req, res) => {
     try {     
-        const libro = { ...req.body, portada: req.files.portada };
+        //Subir a Cloudinary
+        // const libro = { ...req.body, portada: req.files.portada };
+        // const newLibro = await createLibro(libro);
+        // res.status(201).json(newLibro);
+        //En local
+        const libro = { ...req.body, portada: req.files }
         const newLibro = await createLibro(libro);
         res.status(201).json(newLibro);
+        
     } catch (error) {
         console.log(error);
         res.status(500).json(error.message);
