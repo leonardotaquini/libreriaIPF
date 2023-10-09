@@ -24,6 +24,10 @@ export const libroSchema = checkSchema({
     fechaPublicacion: {
         in: ["body"],
         notEmpty: true
+    },
+    genero:{
+        in: ["body"],
+        notEmpty: true
     }
 });
 
