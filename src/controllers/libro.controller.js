@@ -24,14 +24,14 @@ export const getLibroByIdCtrl = async (req, res) => {
 
 export const createLibroCtrl = async (req, res) => {
     try {     
-        //Subir a Cloudinary
-        // const libro = { ...req.body, portada: req.files.portada };
-        // const newLibro = await createLibro(libro);
-        // res.status(201).json(newLibro);
-        //En local
-        const libro = { ...req.body, portada: req.files }
+        // Subir a Cloudinary
+        const libro = { ...req.body, portada: req.files.portada };
         const newLibro = await createLibro(libro);
         res.status(201).json(newLibro);
+        //En local
+        // const libro = { ...req.body, portada: req.files }
+        // const newLibro = await createLibro(libro);
+        // res.status(201).json(newLibro);
         
     } catch (error) {
         console.log(error);

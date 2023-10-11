@@ -1,7 +1,6 @@
 import { Schema, model } from "mongoose";
 import { addLibroToAutor, deleteLibroToAutor } from "./Autor.js";
 import { uploadImageToCloudinary } from "../helpers/uploadImage.js";
-import { saveImage } from "../helpers/saveImage.js";
 
 const libroSchema = new Schema({
   titulo: {
@@ -67,14 +66,11 @@ export const getLibroById = async (id) => {
 export const createLibro = async (libro) => {
   try {
     const { autor, portada } = libro;
-    // const imageUrl = await uploadImageToCloudinary(portada);
-    const imageUrl = await saveImage(portada);
+    const imageUrl = await uploadImageToCloudinary(portada);
     libro.portada = imageUrl;
-    console.log(libro)
-    // const newLibro = await Libro.create(libro);
-    // addLibroToAutor(autor, newLibro);
-    // return newLibro;
-    return {msg: 'hola'};
+    const newLibro = await Libro.create(libro);
+    addLibroToAutor(autor, newLibro);
+    return newLibro;
   } catch (error) {
     console.log(error);
     throw error;

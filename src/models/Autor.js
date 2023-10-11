@@ -1,4 +1,5 @@
 import {Schema, model} from "mongoose";
+import { Libro } from "./Libro.js";
 
 const autorSchema = new Schema({
     nombre: {
@@ -72,6 +73,7 @@ export const updateAutor = async (id, autor) => {
 
 export const deleteAutor = async (id) => {
     try {
+        await Libro.deleteMany({autor: id});
         const deletedAutor = await Autor.findByIdAndDelete(id);
         return deletedAutor;
     }
